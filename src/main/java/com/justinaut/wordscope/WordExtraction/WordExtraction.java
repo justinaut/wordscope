@@ -1,4 +1,4 @@
-package com.justinaut.wordscope;
+package com.justinaut.wordscope.WordExtraction;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

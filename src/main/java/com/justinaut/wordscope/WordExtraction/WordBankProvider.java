@@ -1,4 +1,4 @@
-package com.justinaut.wordscope;
+package com.justinaut.wordscope.WordExtraction;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;

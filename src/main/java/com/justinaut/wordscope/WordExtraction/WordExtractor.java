@@ -1,8 +1,9 @@
-package com.justinaut.wordscope;
+package com.justinaut.wordscope.WordExtraction;
 
 import java.util.*;
 
-import static java.util.Collections.*;
+import static java.util.Collections.emptyMap;
+import static java.util.Collections.emptySet;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 

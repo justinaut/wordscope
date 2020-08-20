@@ -1,4 +1,4 @@
-package com.justinaut.wordscope;
+package com.justinaut.wordscope.WordExtraction;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
