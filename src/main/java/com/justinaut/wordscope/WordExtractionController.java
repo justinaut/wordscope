@@ -18,7 +18,7 @@ public class WordExtractionController {
         }
 
         WordExtractor wordExtractor = new WordExtractor();
-        return wordExtractor.extractWords(input, wordBankProvider.getWordBank());
+        return wordExtractor.extractWords(input, wordBankProvider.getWordSet());
     }
 
 }

@@ -2,8 +2,7 @@ package com.justinaut.wordscope;
 
 import java.util.*;
 
-import static java.util.Collections.emptyList;
-import static java.util.Collections.emptyMap;
+import static java.util.Collections.*;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
@@ -11,16 +10,16 @@ import static java.util.stream.Collectors.toList;
 // Characters not meeting this criteria will mostly be ignored.
 public class WordExtractor {
 
-    public WordExtraction extractWords(String input, List<String> wordBank) {
+    public WordExtraction extractWords(String input, Set<String> wordSet) {
         if (input == null) {
             input = "";
         }
-        if (wordBank == null) {
-            wordBank = emptyList();
+        if (wordSet == null) {
+            wordSet = emptySet();
         }
 
         String finalizedInput = input.toLowerCase();
-        List<String> wordList = wordBank.stream()
+        List<String> wordList = wordSet.stream()
                 .filter(word -> isSubWord(finalizedInput, word))
                 .collect(toList());
 

@@ -8,15 +8,15 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import static java.util.Collections.emptyList;
-import static java.util.Collections.emptyMap;
+import static java.util.Collections.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WordExtractorTest {
 
     WordExtractor subject;
-    List<String> wordBank = List.of("eve", "veer", "nerve", "even", "ever", "zen", "never");
+    Set<String> wordSet = Set.of("eve", "veer", "nerve", "even", "ever", "zen", "never");
 
     @BeforeEach
     void setup() {
@@ -26,7 +26,7 @@ class WordExtractorTest {
     @Test
     @DisplayName("Word extractor returns an extraction object containing the given string")
     void extractWords_returnsGivenString() {
-        WordExtraction actual = subject.extractWords("some given string", wordBank);
+        WordExtraction actual = subject.extractWords("some given string", wordSet);
 
         assertThat(actual.getInput()).isEqualTo("some given string");
     }
@@ -34,7 +34,7 @@ class WordExtractorTest {
     @Test
     @DisplayName("Word extractor applies toLowerCase() to input string")
     void extractWords_returnsGivenStringInLowerCase() {
-        WordExtraction actual = subject.extractWords("ALL CAPS", wordBank);
+        WordExtraction actual = subject.extractWords("ALL CAPS", wordSet);
 
         assertThat(actual.getInput()).isEqualTo("all caps");
     }
@@ -42,27 +42,27 @@ class WordExtractorTest {
     @Test
     @DisplayName("Word extractor returns an extraction object containing a list of words containing letters from the input")
     void extractWords_longList() {
-        WordExtraction actual = subject.extractWords("rvnee", wordBank);
+        WordExtraction actual = subject.extractWords("rvnee", wordSet);
 
         assertThat(actual.getWords()).containsExactly("nerve", "never", "even", "ever", "veer", "eve");
     }
 
     @Test
-    void extractWords_emptyWordBank() {
-        WordExtraction actual = subject.extractWords("eerv", emptyList());
+    void extractWords_emptyWordSet() {
+        WordExtraction actual = subject.extractWords("eerv", emptySet());
 
         assertThat(actual.getWords()).isEmpty();
     }
 
     @Test
     void extractWords_nullInputString() {
-        WordExtraction actual = subject.extractWords(null, wordBank);
+        WordExtraction actual = subject.extractWords(null, wordSet);
 
         assertThat(actual.getInput()).isEqualTo("");
     }
 
     @Test
-    void extractWords_nullWordBank() {
+    void extractWords_nullWordSet() {
         WordExtraction actual = subject.extractWords("eerv", null);
 
         assertThat(actual.getWords()).isEmpty();

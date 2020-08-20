@@ -9,6 +9,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import static java.util.Collections.emptyList;
+import static java.util.Collections.emptySet;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -25,7 +26,7 @@ class WordExtractionControllerTest {
 
     @BeforeEach
     void setup() {
-        when(mockWordBankProvider.getWordBank()).thenReturn(emptyList());
+        when(mockWordBankProvider.getWordSet()).thenReturn(emptySet());
     }
 
     @Test

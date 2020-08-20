@@ -30,13 +30,13 @@ class WordBankProviderTest {
     }
 
     @Test
-    @DisplayName("Word bank is loaded from file")
-    void load_loadsWordBank() throws IOException {
+    @DisplayName("Word set is loaded from file")
+    void load_loadsWordSet() throws IOException {
         when(resourceLoader.getResource(anyString())).thenReturn(new ClassPathResource("static/test_words.txt"));
 
-        assertThat(subject.getWordBank()).isEmpty();
+        assertThat(subject.getWordSet()).isEmpty();
         subject.load();
-        assertThat(subject.getWordBank()).containsExactly("four", "one", "three", "two");
+        assertThat(subject.getWordSet()).containsExactly("four", "one", "three", "two");
     }
 
     @Test

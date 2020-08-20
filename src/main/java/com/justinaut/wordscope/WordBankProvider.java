@@ -6,22 +6,23 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
+
+import static java.util.Collections.emptySet;
+import static java.util.stream.Collectors.toSet;
 
 @Component
 public class WordBankProvider {
 
-    private List<String> wordBank = new ArrayList<>();
+    private Set<String> wordSet = emptySet();
     ResourceLoader resourceLoader;
 
     public WordBankProvider(ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;
     }
 
-    public List<String> getWordBank() {
-        return wordBank;
+    public Set<String> getWordSet() {
+        return wordSet;
     }
 
     @PostConstruct
@@ -39,6 +40,6 @@ public class WordBankProvider {
 
         InputStream inputStream = resource.getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        wordBank = reader.lines().collect(Collectors.toList());
+        wordSet = reader.lines().collect(toSet());
     }
 }
