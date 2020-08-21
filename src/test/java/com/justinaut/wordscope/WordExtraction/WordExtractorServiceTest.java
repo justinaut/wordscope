@@ -18,15 +18,15 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
-class WordBankProviderTest {
-    private WordBankProvider subject;
+class WordExtractorServiceTest {
+    private WordExtractorService subject;
 
     @MockBean
     ResourceLoader resourceLoader;
 
     @BeforeEach
     void setup() {
-        subject = new WordBankProvider(resourceLoader);
+        subject = new WordExtractorService(resourceLoader);
     }
 
     @Test

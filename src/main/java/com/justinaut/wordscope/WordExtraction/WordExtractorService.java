@@ -2,7 +2,7 @@ package com.justinaut.wordscope.WordExtraction;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.*;
@@ -11,13 +11,13 @@ import java.util.Set;
 import static java.util.Collections.emptySet;
 import static java.util.stream.Collectors.toSet;
 
-@Component
-public class WordBankProvider {
+@Service
+public class WordExtractorService {
 
     private Set<String> wordSet = emptySet();
     ResourceLoader resourceLoader;
 
-    public WordBankProvider(ResourceLoader resourceLoader) {
+    public WordExtractorService(ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;
     }
 

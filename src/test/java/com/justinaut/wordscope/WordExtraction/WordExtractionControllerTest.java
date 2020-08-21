@@ -22,11 +22,11 @@ class WordExtractionControllerTest {
     MockMvc mockMvc;
 
     @MockBean
-    WordBankProvider mockWordBankProvider;
+    WordExtractorService mockWordExtractorService;
 
     @BeforeEach
     void setup() {
-        when(mockWordBankProvider.getWordSet()).thenReturn(emptySet());
+        when(mockWordExtractorService.getWordSet()).thenReturn(emptySet());
     }
 
     @Test
@@ -53,7 +53,7 @@ class WordExtractionControllerTest {
         // This test may be deleted as it does not represent the intended use of the controller as a manager of application end points.
 
         WordExtractionController subject = new WordExtractionController();
-        subject.wordBankProvider = mockWordBankProvider;
+        subject.wordExtractorService = mockWordExtractorService;
 
         WordExtraction extraction = subject.handleGet("some string");
 

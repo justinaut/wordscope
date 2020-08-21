@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class WordExtractionController {
 
     @Autowired
-    WordBankProvider wordBankProvider;
+    WordExtractorService wordExtractorService;
 
     @RequestMapping("/extractWords")
     public WordExtraction handleGet(@RequestParam(name = "in", required = false) String input) {
@@ -18,7 +18,7 @@ public class WordExtractionController {
         }
 
         WordExtractor wordExtractor = new WordExtractor();
-        return wordExtractor.extractWords(input, wordBankProvider.getWordSet());
+        return wordExtractor.extractWords(input, wordExtractorService.getWordSet());
     }
 
 }
