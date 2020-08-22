@@ -8,7 +8,7 @@ import javax.annotation.PostConstruct;
 import java.io.*;
 import java.util.Set;
 
-import static java.util.Collections.emptySet;
+import static java.util.Collections.*;
 import static java.util.stream.Collectors.toSet;
 
 @Service
@@ -41,5 +41,11 @@ public class WordExtractorService {
         InputStream inputStream = resource.getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         wordSet = reader.lines().collect(toSet());
+    }
+
+    public WordExtraction getWordExtraction(String input) {
+        WordExtractor wordExtractor = new WordExtractor();
+
+        return wordExtractor.extractWords(input, getWordSet());
     }
 }

@@ -8,10 +8,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import static java.util.Collections.emptyList;
-import static java.util.Collections.emptySet;
+import static java.util.Collections.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -31,7 +30,9 @@ class WordExtractionControllerTest {
 
     @Test
     void handleGet_withInputParameter() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(get("/extractWords?in=scrambled string"))
+        when(mockWordExtractorService.getWordExtraction(anyString())).thenReturn(new WordExtraction("scrambled string", emptyList()));
+
+        MvcResult mvcResult = mockMvc.perform(get("/extractWords?q=scrambled string"))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -40,6 +41,8 @@ class WordExtractionControllerTest {
 
     @Test
     void handleGet_withoutInputParameter() throws Exception {
+        when(mockWordExtractorService.getWordExtraction(any())).thenReturn(new WordExtraction("", emptyList()));
+
         MvcResult mvcResult = mockMvc.perform(get("/extractWords"))
                 .andExpect(status().isOk())
                 .andReturn();
@@ -48,9 +51,19 @@ class WordExtractionControllerTest {
     }
 
     @Test
-    void handleGet_viaDirectCall() {
+    void handleGet_interactsWithWordExtractorService() throws Exception {
+        mockMvc.perform(get("/extractWords?q=scrambled string"))
+                .andExpect(status().isOk())
+                .andReturn();
 
+        verify(mockWordExtractorService, times(1)).getWordExtraction("scrambled string");
+    }
+
+    @Test
+    void handleGet_viaDirectCall() {
         // This test may be deleted as it does not represent the intended use of the controller as a manager of application end points.
+
+        when(mockWordExtractorService.getWordExtraction(anyString())).thenReturn(new WordExtraction("some string", emptyList()));
 
         WordExtractionController subject = new WordExtractionController();
         subject.wordExtractorService = mockWordExtractorService;

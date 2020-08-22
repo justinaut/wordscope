@@ -12,13 +12,8 @@ public class WordExtractionController {
     WordExtractorService wordExtractorService;
 
     @RequestMapping("/extractWords")
-    public WordExtraction handleGet(@RequestParam(name = "in", required = false) String input) {
-        if (input == null) {
-            input = "";
-        }
-
-        WordExtractor wordExtractor = new WordExtractor();
-        return wordExtractor.extractWords(input, wordExtractorService.getWordSet());
+    public WordExtraction handleGet(@RequestParam(name = "q", required = false) String input) {
+        return wordExtractorService.getWordExtraction(input);
     }
 
 }

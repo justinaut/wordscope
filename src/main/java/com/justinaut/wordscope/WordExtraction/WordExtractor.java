@@ -20,11 +20,11 @@ public class WordExtractor {
         }
 
         String finalizedInput = input.toLowerCase();
-        List<String> wordList = wordSet.stream()
+        List<String> subWords = wordSet.stream()
                 .filter(word -> isSubWord(finalizedInput, word))
                 .collect(toList());
 
-        return new WordExtraction(finalizedInput, orderByLengthAndAlpha(wordList));
+        return new WordExtraction(finalizedInput, orderByLengthAndAlpha(subWords));
     }
 
     public Map<Character, Integer> makeLetterInventory(String input) {

@@ -11,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -60,4 +61,14 @@ class WordExtractorServiceTest {
         assertThat(fileNotFoundException.getMessage()).isEqualTo("File not found: file_does_not_exist.txt");
     }
 
+    @Test
+    @DisplayName("getWordExtraction returns a WordExtraction containing subwords from an input string")
+    void getWordExtraction_stringInput() throws IOException {
+        when(resourceLoader.getResource(anyString())).thenReturn(new ClassPathResource("static/test_words.txt"));
+        subject.load();
+
+        WordExtraction actualExtraction = subject.getWordExtraction("wotone");
+
+        assertThat(actualExtraction).isEqualTo(new WordExtraction("wotone", List.of("one", "two")));
+    }
 }
