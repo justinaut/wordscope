@@ -44,8 +44,6 @@ public class WordExtractorService {
     }
 
     public WordExtraction getWordExtraction(String input) {
-        WordExtractor wordExtractor = new WordExtractor();
-
-        return wordExtractor.extractWords(input, getWordSet());
+        return WordExtractor.extractWords(input, getWordSet());
     }
 }

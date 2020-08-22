@@ -11,7 +11,7 @@ import static java.util.stream.Collectors.toList;
 // Characters not meeting this criteria will mostly be ignored.
 public class WordExtractor {
 
-    public WordExtraction extractWords(String input, Set<String> wordSet) {
+    public static WordExtraction extractWords(String input, Set<String> wordSet) {
         if (input == null) {
             input = "";
         }
@@ -27,7 +27,7 @@ public class WordExtractor {
         return new WordExtraction(finalizedInput, orderByLengthAndAlpha(subWords));
     }
 
-    public Map<Character, Integer> makeLetterInventory(String input) {
+    public static Map<Character, Integer> makeLetterInventory(String input) {
         if (input == null || input.isEmpty() || input.isBlank()) {
             return emptyMap();
         }
@@ -44,7 +44,7 @@ public class WordExtractor {
         return letterInventory;
     }
 
-    public boolean isSubWord(String supply, String demand) {
+    public static boolean isSubWord(String supply, String demand) {
         if (supply == null || demand == null
                 || supply.isBlank() || demand.isBlank()) {
             return false;
@@ -66,7 +66,7 @@ public class WordExtractor {
         return true;
     }
 
-    public List<String> orderByLengthAndAlpha(List<String> listToBeOrdered) {
+    public static List<String> orderByLengthAndAlpha(List<String> listToBeOrdered) {
         if (listToBeOrdered.size() == 1) {
             return listToBeOrdered;
         }

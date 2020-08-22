@@ -1,6 +1,5 @@
 package com.justinaut.wordscope.WordExtraction;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,18 +14,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class WordExtractorTest {
 
-    WordExtractor subject;
     Set<String> wordSet = Set.of("eve", "veer", "nerve", "even", "ever", "zen", "never");
-
-    @BeforeEach
-    void setup() {
-        subject = new WordExtractor();
-    }
 
     @Test
     @DisplayName("Word extractor returns an extraction object containing the given string")
     void extractWords_returnsGivenString() {
-        WordExtraction actual = subject.extractWords("some given string", wordSet);
+        WordExtraction actual = WordExtractor.extractWords("some given string", wordSet);
 
         assertThat(actual.getInput()).isEqualTo("some given string");
     }
@@ -34,7 +27,7 @@ class WordExtractorTest {
     @Test
     @DisplayName("Word extractor applies toLowerCase() to input string")
     void extractWords_returnsGivenStringInLowerCase() {
-        WordExtraction actual = subject.extractWords("ALL CAPS", wordSet);
+        WordExtraction actual = WordExtractor.extractWords("ALL CAPS", wordSet);
 
         assertThat(actual.getInput()).isEqualTo("all caps");
     }
@@ -42,28 +35,28 @@ class WordExtractorTest {
     @Test
     @DisplayName("Word extractor returns an extraction object containing a list of words containing letters from the input")
     void extractWords_longList() {
-        WordExtraction actual = subject.extractWords("rvnee", wordSet);
+        WordExtraction actual = WordExtractor.extractWords("rvnee", wordSet);
 
         assertThat(actual.getWords()).containsExactly("nerve", "never", "even", "ever", "veer", "eve");
     }
 
     @Test
     void extractWords_emptyWordSet() {
-        WordExtraction actual = subject.extractWords("eerv", emptySet());
+        WordExtraction actual = WordExtractor.extractWords("eerv", emptySet());
 
         assertThat(actual.getWords()).isEmpty();
     }
 
     @Test
     void extractWords_nullInputString() {
-        WordExtraction actual = subject.extractWords(null, wordSet);
+        WordExtraction actual = WordExtractor.extractWords(null, wordSet);
 
         assertThat(actual.getInput()).isEqualTo("");
     }
 
     @Test
     void extractWords_nullWordSet() {
-        WordExtraction actual = subject.extractWords("eerv", null);
+        WordExtraction actual = WordExtractor.extractWords("eerv", null);
 
         assertThat(actual.getWords()).isEmpty();
     }
@@ -71,7 +64,7 @@ class WordExtractorTest {
     @Test
     @DisplayName("A count of letters are produced with a given string")
     void makeLetterInventory_nonEmptyString() {
-        Map<Character, Integer> characterIntegerMap = subject.makeLetterInventory("rifflandia");
+        Map<Character, Integer> characterIntegerMap = WordExtractor.makeLetterInventory("rifflandia");
 
         assertThat(characterIntegerMap).isEqualTo(
                 Map.of(
@@ -89,13 +82,13 @@ class WordExtractorTest {
     @ValueSource(strings = { "", " ", "\t", "\n" })
     @DisplayName("Blank strings (empty or whitespace) produces an empty letter inventory")
     void makeLetterInventory_emptyInput(String input) {
-        assertThat(subject.makeLetterInventory(input)).isEqualTo(emptyMap());
+        assertThat(WordExtractor.makeLetterInventory(input)).isEqualTo(emptyMap());
     }
 
     @Test
     @DisplayName("Mixed input (blank and non-blank) produces a letter inventory without whitespace characters")
     void makeLetterInventory_mixedInput() {
-        Map<Character, Integer> characterIntegerMap = subject.makeLetterInventory("\t tabbed \n the end");
+        Map<Character, Integer> characterIntegerMap = WordExtractor.makeLetterInventory("\t tabbed \n the end");
 
         assertThat(characterIntegerMap).isEqualTo(
                 Map.of(
@@ -112,7 +105,7 @@ class WordExtractorTest {
     @Test
     @DisplayName("makeLetterInventory permits upper case and lower case")
     void makeLetterInventory_permitsMixedCase() {
-        Map<Character, Integer> characterIntegerMap = subject.makeLetterInventory("JUST because");
+        Map<Character, Integer> characterIntegerMap = WordExtractor.makeLetterInventory("JUST because");
 
         assertThat(characterIntegerMap).isEqualTo(
                 Map.of(
@@ -132,79 +125,79 @@ class WordExtractorTest {
     @Test
     @DisplayName("A null string produces an empty letter inventory")
     void makeLetterInventory_nullInput() {
-        Map<Character, Integer> characterIntegerMap = subject.makeLetterInventory(null);
+        Map<Character, Integer> characterIntegerMap = WordExtractor.makeLetterInventory(null);
 
         assertThat(characterIntegerMap).isEqualTo(emptyMap());
     }
 
     @Test
     void isSubWord_exactMatch() {
-        assertThat(subject.isSubWord("samestring", "samestring")).isTrue();
+        assertThat(WordExtractor.isSubWord("samestring", "samestring")).isTrue();
     }
 
     @Test
     void isSubWord_anagram() {
-        assertThat(subject.isSubWord("never", "nerve")).isTrue();
+        assertThat(WordExtractor.isSubWord("never", "nerve")).isTrue();
     }
 
     @Test
     void isSubWord_lengthMismatch() {
-        assertThat(subject.isSubWord("even", "steven")).isFalse();
+        assertThat(WordExtractor.isSubWord("even", "steven")).isFalse();
     }
 
     @Test
     void isSubWord_letterMismatch() {
-        assertThat(subject.isSubWord("even", "zen")).isFalse();
+        assertThat(WordExtractor.isSubWord("even", "zen")).isFalse();
     }
 
     @Test
     void isSubWord_emptyInputs() {
-        assertThat(subject.isSubWord("", "")).isFalse();
+        assertThat(WordExtractor.isSubWord("", "")).isFalse();
     }
 
     @Test
     void isSubWord_emptySupplyWord() {
-        assertThat(subject.isSubWord("supply", "")).isFalse();
+        assertThat(WordExtractor.isSubWord("supply", "")).isFalse();
     }
 
     @Test
     void isSubWord_emptyDemandWord() {
-        assertThat(subject.isSubWord("", "demand")).isFalse();
+        assertThat(WordExtractor.isSubWord("", "demand")).isFalse();
     }
 
     @Test
     void isSubWord_whiteSpaceInputs() {
-        assertThat(subject.isSubWord("\t\t", "\t\t\t")).isFalse();
+        assertThat(WordExtractor.isSubWord("\t\t", "\t\t\t")).isFalse();
     }
 
     @Test
     void isSubWord_nullSupplyString() {
-        assertThat(subject.isSubWord(null, "demand")).isFalse();
+        assertThat(WordExtractor.isSubWord(null, "demand")).isFalse();
     }
 
     @Test
     void isSubWord_nullDemandString() {
-        assertThat(subject.isSubWord("supply", null)).isFalse();
+        assertThat(WordExtractor.isSubWord("supply", null)).isFalse();
     }
 
     @Test
     void orderByLengthAndAlpha_emptyInputList() {
-        assertThat(subject.orderByLengthAndAlpha(emptyList())).isEqualTo(emptyList());
+        assertThat(WordExtractor.orderByLengthAndAlpha(emptyList())).isEqualTo(emptyList());
     }
 
     @Test
     void orderByLengthAndAlpha_singleItemInputList() {
-        assertThat(subject.orderByLengthAndAlpha(List.of("single"))).isEqualTo(List.of("single"));
+        assertThat(WordExtractor.orderByLengthAndAlpha(List.of("single"))).isEqualTo(List.of("single"));
     }
 
     @Test
     void orderByLengthAndAlpha_alphaSortInputList() {
-        assertThat(subject.orderByLengthAndAlpha(List.of("single", "double"))).isEqualTo(List.of("double", "single"));
+        assertThat(WordExtractor.orderByLengthAndAlpha(List.of("single", "double"))).isEqualTo(List.of("double", "single"));
     }
 
     @Test
     void orderByLengthAndAlpha_lengthAndAlphaSortInputList() {
-        assertThat(subject.orderByLengthAndAlpha(List.of("single", "double", "triple", "quadruple"))).isEqualTo(List.of("quadruple", "double", "single", "triple"));
+        assertThat(WordExtractor.orderByLengthAndAlpha(List.of("single", "double", "triple", "quadruple"))).isEqualTo(List.of("quadruple", "double", "single", "triple"));
     }
 
 
