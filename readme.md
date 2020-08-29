@@ -1,4 +1,5 @@
 # Wordscope
+[![build action](https://github.com/justinaut/wordscope/workflows/build/badge.svg)](https://github.com/justinaut/wordscope/actions)
 
 ## Extract Words
 Find words that can be derived from a given string.
