@@ -2,3 +2,6 @@
 spring:
   main:
     banner-mode: off
+  freemarker:
+    cache: false
+    template-loader-path: file:./src/main/resources/templates
