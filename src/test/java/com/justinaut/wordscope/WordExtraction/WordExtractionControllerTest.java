@@ -32,7 +32,7 @@ class WordExtractionControllerTest {
     void handleGet_withInputParameter() throws Exception {
         when(mockWordExtractorService.getWordExtraction(anyString())).thenReturn(new WordExtraction("scrambled string", emptyList()));
 
-        MvcResult mvcResult = mockMvc.perform(get("/extractWords?q=scrambled string"))
+        MvcResult mvcResult = mockMvc.perform(get("/extractWords/extract?q=scrambled string"))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -43,7 +43,7 @@ class WordExtractionControllerTest {
     void handleGet_withoutInputParameter() throws Exception {
         when(mockWordExtractorService.getWordExtraction(any())).thenReturn(new WordExtraction("", emptyList()));
 
-        MvcResult mvcResult = mockMvc.perform(get("/extractWords"))
+        MvcResult mvcResult = mockMvc.perform(get("/extractWords/extract"))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -52,7 +52,7 @@ class WordExtractionControllerTest {
 
     @Test
     void handleGet_interactsWithWordExtractorService() throws Exception {
-        mockMvc.perform(get("/extractWords?q=scrambled string"))
+        mockMvc.perform(get("/extractWords/extract?q=scrambled string"))
                 .andExpect(status().isOk())
                 .andReturn();
 

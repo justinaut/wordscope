@@ -11,7 +11,7 @@ public class WordExtractionController {
     @Autowired
     WordExtractorService wordExtractorService;
 
-    @RequestMapping("/extractWords")
+    @RequestMapping("/extractWords/extract")
     public WordExtraction handleGet(@RequestParam(name = "q", required = false) String input) {
         return wordExtractorService.getWordExtraction(input);
     }
