@@ -13,5 +13,9 @@
 <div>Sums the numerical value of each character in a string</div>
 <a href="/asciiSum">link</a>
 
+<div>WordExtraction</div>
+<div>Finds the words embedded in another word, or a word jumble</div>
+<a href="/wordExtraction">link</a>
+
 </body>
 </html>
