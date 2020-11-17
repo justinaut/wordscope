@@ -15,7 +15,7 @@
 
 <div>WordExtraction</div>
 <div>Finds the words embedded in another word, or a word jumble</div>
-<a href="/wordExtraction">link</a>
+<a href="/extractWords">link</a>
 
 </body>
 </html>
